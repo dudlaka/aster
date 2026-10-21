@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ASTER Soluciones Técnicas | Refrigeración Industrial & Sistemas Cryo</title>
-    <meta name="description" content="Interfaz industrial futurista de ASTER Soluciones Técnicas. Ingeniería de frío industrial, mantenimiento preventivo, sustitución F-Gas y asistencia urgente de averías 24/7.">
+    <title>ASTER Soluciones Técnicas | Refrigeración Industrial & Sistemas Inverter</title>
+    <meta name="description" content="ASTER Soluciones Técnicas. Ingeniería de frío industrial, retrofit Inverter, válvulas de expansión electrónicas, mantenimiento preventivo y urgencias 24h. Tel: 675 38 75 75.">
     <meta name="theme-color" content="#030711">
 
-    <!-- Stylesheet -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -15,11 +14,11 @@
     <!-- CRT / Scanline Screen Overlay (Optional toggle) -->
     <div id="crt-screen-overlay" aria-hidden="true"></div>
 
-    <!-- 3D WebGL Three.js Canvas Container -->
+    <!-- 3D WebGL Canvas Container -->
     <div id="webgl-container"></div>
 
     <!-- Hanging SVG Icicles below Top Control Panel -->
-    <svg class="top-icicles-svg" viewBox="0 0 1440 38" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <svg class="top-icicles-svg" viewBox="0 0 1440 34" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
             <linearGradient id="icicleGradient" x1="0%" y1="0%" x2="0%" y2="100%">
                 <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
@@ -33,21 +32,21 @@
             </filter>
         </defs>
         <path d="M0,0 L1440,0 L1440,4 
-                 L1420,18 L1410,4 L1395,28 L1385,6 L1370,16 L1360,3 L1345,34 L1335,5 L1320,19 L1310,4
-                 L1290,26 L1280,5 L1265,14 L1255,3 L1238,36 L1228,6 L1212,18 L1200,4 L1185,29 L1175,5
-                 L1160,15 L1150,3 L1132,32 L1122,6 L1105,17 L1095,4 L1078,25 L1068,5 L1050,14 L1040,3
-                 L1022,38 L1012,6 L995,19 L985,4 L968,27 L958,5 L942,16 L932,3 L915,35 L905,6
-                 L888,18 L878,4 L860,26 L850,5 L835,15 L825,3 L808,34 L798,6 L782,19 L770,4
-                 L755,28 L745,5 L730,16 L720,3 L702,36 L692,6 L675,18 L665,4 L648,27 L638,5
-                 L622,15 L612,3 L595,33 L585,6 L568,19 L558,4 L540,26 L530,5 L515,14 L505,3
-                 L488,37 L478,6 L462,18 L450,4 L435,28 L425,5 L410,16 L400,3 L382,35 L372,6
-                 L355,19 L345,4 L328,27 L318,5 L302,15 L292,3 L275,34 L265,6 L248,18 L238,4
-                 L220,26 L210,5 L195,15 L185,3 L168,36 L158,6 L142,19 L130,4 L115,28 L105,5
-                 L90,16 L80,3 L62,35 L52,6 L35,19 L25,4 L8,25 L0,4 Z" 
+                 L1420,18 L1410,4 L1395,28 L1385,6 L1370,16 L1360,3 L1345,32 L1335,5 L1320,19 L1310,4
+                 L1290,26 L1280,5 L1265,14 L1255,3 L1238,34 L1228,6 L1212,18 L1200,4 L1185,28 L1175,5
+                 L1160,15 L1150,3 L1132,30 L1122,6 L1105,17 L1095,4 L1078,25 L1068,5 L1050,14 L1040,3
+                 L1022,34 L1012,6 L995,19 L985,4 L968,27 L958,5 L942,16 L932,3 L915,32 L905,6
+                 L888,18 L878,4 L860,26 L850,5 L835,15 L825,3 L808,32 L798,6 L782,19 L770,4
+                 L755,28 L745,5 L730,16 L720,3 L702,34 L692,6 L675,18 L665,4 L648,27 L638,5
+                 L622,15 L612,3 L595,31 L585,6 L568,19 L558,4 L540,26 L530,5 L515,14 L505,3
+                 L488,34 L478,6 L462,18 L450,4 L435,28 L425,5 L410,16 L400,3 L382,32 L372,6
+                 L355,19 L345,4 L328,27 L318,5 L302,15 L292,3 L275,32 L265,6 L248,18 L238,4
+                 L220,26 L210,5 L195,15 L185,3 L168,34 L158,6 L142,19 L130,4 L115,28 L105,5
+                 L90,16 L80,3 L62,32 L52,6 L35,19 L25,4 L8,25 L0,4 Z" 
               fill="url(#icicleGradient)" filter="url(#iceGlow)" />
     </svg>
 
-    <!-- Industrial Outer Visor Frame with Metallic Side Pillars -->
+    <!-- Industrial Outer Visor Frame -->
     <div class="hud-visor-frame">
         <aside class="hud-pillar-left">
             <div class="pillar-bolt"></div>
@@ -73,7 +72,7 @@
     </div>
 
     <!-- ======================================================================
-         TOP INDUSTRIAL METALLIC CONTROL PANEL (HEADER)
+         TOP INDUSTRIAL CONTROL PANEL (HEADER)
          ====================================================================== -->
     <header class="top-industrial-header">
         <!-- Logo: ASTER Soluciones Técnicas -->
@@ -91,7 +90,7 @@
             </div>
         </div>
 
-        <!-- Technical Navigation Buttons -->
+        <!-- Technical Navigation Buttons (AVERÍAS, CONTRATOS, EFICIENCIA, CONTACTO) -->
         <nav class="header-nav-buttons" aria-label="Navegación principal">
             <button class="nav-tech-btn urgent-indicator" data-target-modal="averias">
                 <span class="nav-idx">[01]</span> AVERÍAS
@@ -99,28 +98,28 @@
             <button class="nav-tech-btn" data-target-modal="contratos">
                 <span class="nav-idx">[02]</span> CONTRATOS
             </button>
-            <button class="nav-tech-btn" data-target-modal="tienda">
-                <span class="nav-idx">[03]</span> TIENDA
+            <button class="nav-tech-btn" data-target-modal="eficiencia">
+                <span class="nav-idx">[03]</span> EFICIENCIA
             </button>
             <button class="nav-tech-btn" data-target-modal="contacto">
                 <span class="nav-idx">[04]</span> CONTACTO
             </button>
         </nav>
 
-        <!-- System Controls (Audio, CRT, System Clock) -->
+        <!-- System Controls: Language Toggle, Audio, CRT, Clock -->
         <div class="header-system-controls">
-            <!-- Audio Toggle with Mini Equalizer -->
-            <button id="audio-toggle" class="system-tool-btn" title="Activar/Silenciar Audio PS2">
-                <div class="eq-bars-mini">
-                    <div class="eq-bar"></div>
-                    <div class="eq-bar"></div>
-                    <div class="eq-bar"></div>
-                    <div class="eq-bar"></div>
-                </div>
-                <span>AUDIO: <strong id="audio-status">ACTIVO</strong></span>
+            <!-- Language Selector (ES / EN) -->
+            <button id="lang-toggle-btn" class="lang-toggle-btn" title="Cambiar idioma / Switch Language">ES</button>
+
+            <!-- Audio SFX Toggle -->
+            <button id="audio-toggle" class="system-tool-btn" title="Efectos de sonido">
+                <span>SFX: <strong id="audio-status">ACTIVO</strong></span>
             </button>
 
-            <!-- CRT Scanline Filter Toggle -->
+            <!-- Mobile HUD View Toggle Button -->
+            <button id="mobile-hud-toggle" class="mobile-hud-toggle" title="Ver telemetría">HUD</button>
+
+            <!-- CRT Scanline Toggle -->
             <button id="crt-toggle" class="system-tool-btn" title="Efecto Monitor CRT">
                 <span>CRT: <strong id="crt-status">OFF</strong></span>
             </button>
@@ -137,135 +136,131 @@
     </header>
 
     <!-- ======================================================================
-         TECHNICAL HUD & TELEMETRY MODULES (SCREEN EDGES - Matching reference.jpg)
+         REFRIGERATION ENGINEERING HUD MODULES (OFICIO DE FRIGORISTA)
          ====================================================================== -->
 
-    <!-- 1. TOP-LEFT HUD PANEL: DATA READOUTS & REFRIGERATION METRICS -->
-    <section class="hud-corner-panel hud-top-left" aria-label="Telemetría de Datos">
+    <!-- 1. ARRIBA-IZQUIERDA: DIAGRAMA DE MOLLIER (p-h) CON CICLO ANIMADO -->
+    <section class="hud-corner-panel hud-top-left" aria-label="Diagrama de Mollier">
         <div class="hud-panel-title">
-            <span>DATA_SYS // REF_CYCLE</span>
-            <span id="tel-hexcode">0x4F9B</span>
+            <span>DIAGRAMA DE MOLLIER // p-h</span>
+            <span>R-449A</span>
         </div>
-        <div class="telemetry-row">
-            <span>DATA1</span>
-            <div class="telemetry-bar-wrap"><div class="telemetry-bar-fill" style="width: 100%;"></div></div>
-            <span class="telemetry-val">58 / 58</span>
+
+        <!-- Canvas with animated saturation curve and refrigerant flow -->
+        <canvas id="mollier-canvas"></canvas>
+
+        <div class="mollier-legend-row">
+            <span>P.EVAP: <strong id="mollier-pevap">3.25 bar</strong></span>
+            <span>P.COND: <strong id="mollier-pcond">16.8 bar</strong></span>
+            <span>Δh: <strong>184 kJ/kg</strong></span>
         </div>
-        <div class="telemetry-row">
-            <span>DATA2</span>
-            <div class="telemetry-bar-wrap"><div class="telemetry-bar-fill" style="width: 82%;"></div></div>
-            <span class="telemetry-val">168 / 50</span>
+    </section>
+
+    <!-- 2. IZQUIERDA-ABAJO: VÁLVULA DE EXPANSIÓN ELECTRÓNICA (EEV) -->
+    <section class="hud-corner-panel hud-bottom-left" aria-label="Válvula de Expansión Electrónica">
+        <div class="hud-panel-title">
+            <span>VÁLVULA EXPANSIÓN // EEV</span>
+            <span style="color: #00ffcc;">PID AUTO</span>
         </div>
-        <div class="telemetry-row">
-            <span>DATA3</span>
-            <div class="telemetry-bar-wrap"><div class="telemetry-bar-fill" style="width: 45%;"></div></div>
-            <span class="telemetry-val">50 / 900</span>
-        </div>
-        <div class="telemetry-row">
-            <span>DATAL</span>
-            <div class="telemetry-bar-wrap"><div class="telemetry-bar-fill" style="width: 48%;"></div></div>
-            <span class="telemetry-val">24 / 50</span>
-        </div>
-        <div class="telemetry-row">
-            <span>PS2C</span>
-            <div class="telemetry-bar-wrap"><div class="telemetry-bar-fill" style="width: 48%;"></div></div>
-            <span class="telemetry-val">24 / 50</span>
-        </div>
-        <!-- Live Sensors -->
-        <div style="border-top: 1px solid rgba(0,210,255,0.18); margin-top: 6px; padding-top: 6px;">
-            <div class="telemetry-row">
-                <span>TEMP. EVAP:</span>
-                <span id="tel-evap-temp" class="telemetry-val" style="color: #00f0ff;">-28.4°C</span>
+
+        <div class="eev-display-grid">
+            <div class="eev-stat-box">
+                <span class="eev-stat-label">APERTURA VÁLVULA</span>
+                <span id="eev-opening-val" class="eev-stat-val">44.5%</span>
             </div>
-            <div class="telemetry-row">
-                <span>PRES. ALTA:</span>
-                <span id="tel-cryo-press" class="telemetry-val">24.8 BAR</span>
+            <div class="eev-stat-box">
+                <span class="eev-stat-label">PASOS MOTOR EEV</span>
+                <span id="eev-steps-val" class="eev-stat-val" style="color: #ffffff; font-size: 13px;">223 / 500</span>
+            </div>
+            <div class="eev-stat-box">
+                <span class="eev-stat-label">TEMP. EVAPORACIÓN</span>
+                <span id="eev-evap-temp" class="eev-stat-val">-28.2°C</span>
+            </div>
+            <div class="eev-stat-box">
+                <span class="eev-stat-label">SOBRECALENTAMIENTO (SH)</span>
+                <span id="eev-superheat" class="eev-stat-val" style="color: #00ffcc;">6.8 K</span>
+            </div>
+        </div>
+
+        <!-- Visual valve stroke bar -->
+        <div class="eev-gauge-bar">
+            <div id="eev-valve-bar" class="eev-gauge-fill" style="width: 44.5%;"></div>
+        </div>
+        <div style="font-family: var(--font-mono); font-size: 9px; color: var(--color-blue-ice); display: flex; justify-content: space-between;">
+            <span>MODULACIÓN DE FLUJO: LÍQUIDO SUBENFRIADO</span>
+            <span>SH ÓPTIMO (3-8K)</span>
+        </div>
+    </section>
+
+    <!-- 3. DERECHA-ARRIBA: MANÓMETROS DIGITALES DE ALTA Y BAJA (DIGITAL MANIFOLD) -->
+    <section class="hud-corner-panel hud-top-right" aria-label="Manómetros Digitales">
+        <div class="hud-panel-title">
+            <span>MANÓMETROS DIGITALES</span>
+            <span>ANALIZADOR 2V</span>
+        </div>
+
+        <div class="manifold-gauges-wrap">
+            <!-- Low Pressure Gauge (Blue) -->
+            <div class="digital-gauge-card low-side">
+                <span class="gauge-header-title">BAJA // ASPIRACIÓN</span>
+                <span id="mani-low-press" class="gauge-press-display" style="color: var(--color-gauge-low);">3.25 bar</span>
+                <div class="gauge-sub-metrics">
+                    <div>T.Evap: <strong id="mani-low-evap" style="color:#fff;">-28.2°C</strong></div>
+                    <div>SH (Recal): <strong id="mani-low-sh" style="color:#00ffcc;">+6.8 K</strong></div>
+                </div>
+            </div>
+
+            <!-- High Pressure Gauge (Red) -->
+            <div class="digital-gauge-card high-side">
+                <span class="gauge-header-title">ALTA // DESCARGA</span>
+                <span id="mani-high-press" class="gauge-press-display" style="color: var(--color-gauge-high);">16.80 bar</span>
+                <div class="gauge-sub-metrics">
+                    <div>T.Cond: <strong id="mani-high-cond" style="color:#fff;">+38.5°C</strong></div>
+                    <div>SC (Subenf): <strong id="mani-high-sc" style="color:#00ffcc;">+4.7 K</strong></div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- 2. BOTTOM-LEFT HUD PANEL: SENSOR ARRAYS & PS2 CONTROLLER LEGEND -->
-    <section class="hud-corner-panel hud-bottom-left" aria-label="Lecturas de Sensores">
+    <!-- 4. ABAJO-DERECHA: VARIADOR DE FRECUENCIA (INVERTER DRIVE) -->
+    <section class="hud-corner-panel hud-bottom-right" aria-label="Variador de Frecuencia">
         <div class="hud-panel-title">
-            <span>LECTURAS // ARRAY SENSOR</span>
-            <span class="sub-clock">19:10</span>
-        </div>
-        <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; color: var(--color-gray-silver);">
-            <span>24:102</span>
-            <span>VOLT: <strong id="tel-voltage" style="color: #fff;">230V</strong></span>
-            <span>FREQ: <strong id="tel-frequency" style="color: #00d2ff;">50Hz</strong></span>
+            <span>VARIADOR DE FRECUENCIA</span>
+            <span style="color: var(--color-success-cyan);">RUN // INVERTER</span>
         </div>
 
-        <!-- Animated Sensor Spectrum Bars -->
-        <div class="sensor-spectrum-container">
-            <div class="hud-bar-col"><div class="hud-bar-fill" style="height: 40%;"></div></div>
-            <div class="hud-bar-col"><div class="hud-bar-fill" style="height: 65%;"></div></div>
-            <div class="hud-bar-col"><div class="hud-bar-fill" style="height: 90%;"></div></div>
-            <div class="hud-bar-col"><div class="hud-bar-fill" style="height: 100%;"></div></div>
-            <div class="hud-bar-col"><div class="hud-bar-fill" style="height: 75%;"></div></div>
-            <div class="hud-bar-col"><div class="hud-bar-fill" style="height: 50%;"></div></div>
-        </div>
-
-        <!-- PlayStation Controller Prompts (PS2 Inspired) -->
-        <div class="ps2-controller-hints">
-            <div class="ps2-btn-hint">
-                <span class="ps2-glyph cross">✕</span>
-                <span>SELECCIONAR</span>
+        <div class="inverter-hero-display">
+            <div>
+                <span style="font-family: var(--font-mono); font-size: 9px; color: var(--color-gray-light); display: block;">FRECUENCIA MOTOR</span>
+                <span id="inv-hz-val" class="inverter-hz-val">48.5 Hz</span>
             </div>
-            <div class="ps2-btn-hint">
-                <span class="ps2-glyph circle">◯</span>
-                <span>VOLVER</span>
+            <div style="text-align: right;">
+                <span style="font-family: var(--font-mono); font-size: 9px; color: var(--color-gray-light); display: block;">VELOCIDAD</span>
+                <span id="inv-rpm-val" class="inverter-rpm-val">1.455 RPM</span>
             </div>
         </div>
-    </section>
 
-    <!-- 3. TOP-RIGHT HUD PANEL: TELEMETRY & DIAGNOSTICS -->
-    <section class="hud-corner-panel hud-top-right" aria-label="Diagnóstico de Sistema">
-        <div class="hud-panel-title">
-            <span>DATAS // TELEMETRÍA</span>
-            <span class="sub-clock">19:10</span>
+        <div class="eev-gauge-bar">
+            <div id="inv-load-bar" class="eev-gauge-fill" style="width: 81%; background: linear-gradient(90deg, #00d2ff, #00ffcc);"></div>
         </div>
 
-        <!-- Mini Frequency Spectrum Bar Graph -->
-        <div class="hud-mini-spectrum">
-            <div class="hud-mini-bar" style="height: 35%;"></div>
-            <div class="hud-mini-bar" style="height: 60%;"></div>
-            <div class="hud-mini-bar" style="height: 45%;"></div>
-            <div class="hud-mini-bar" style="height: 80%;"></div>
-            <div class="hud-mini-bar" style="height: 95%;"></div>
-            <div class="hud-mini-bar" style="height: 50%;"></div>
-            <div class="hud-mini-bar" style="height: 30%;"></div>
-            <div class="hud-mini-bar" style="height: 70%;"></div>
-            <div class="hud-mini-bar" style="height: 40%;"></div>
-            <div class="hud-mini-bar" style="height: 25%;"></div>
-        </div>
-
-        <!-- System Parameters matching reference.jpg -->
-        <div class="diag-grid">
-            <span>LOD: <strong>3008 | 016.170</strong></span>
-            <span>NCR: <strong>23.08 | 09.220</strong></span>
-            <span>PRMG: <strong>18.05 | 06.208</strong></span>
-            <span>P4KS: <strong>23.08 | 08.900</strong></span>
+        <div class="inverter-specs-grid">
+            <div>
+                <span>CONSUMO</span>
+                <strong id="inv-amps-val">14.2 A</strong>
+            </div>
+            <div>
+                <span>VOLTAJE</span>
+                <strong id="inv-volts-val">398 V</strong>
+            </div>
+            <div>
+                <span>POTENCIA</span>
+                <strong id="inv-power-val">8.4 kW</strong>
+            </div>
         </div>
     </section>
 
-    <!-- 4. BOTTOM-RIGHT HUD PANEL: LIVE OSCILLOSCOPE & REFRIGERANT LOOP -->
-    <section class="hud-corner-panel hud-bottom-right" aria-label="Oscilograma de Compresión">
-        <div class="hud-panel-title">
-            <span>23.9600 // COMP_WAVE</span>
-            <span>22:688 &rarr; 2:890</span>
-        </div>
-
-        <!-- Dynamic Live Canvas Oscilloscope -->
-        <canvas id="osc-canvas"></canvas>
-
-        <div class="refrig-circuit-meter">
-            <span>CIRCUITO I: 1.155</span>
-            <span style="color: #00d2ff;">[■■■■■■■■■□□□]</span>
-        </div>
-    </section>
-
-    <!-- 5. BOTTOM-CENTER HUD CAPSULE: COOLING SYSTEM STATUS -->
+    <!-- 5. BOTTOM-CENTER HUD CAPSULE -->
     <footer class="hud-bottom-center">
         <div class="cooling-status-pill">
             <span>COOLING SYSTEM:</span>
@@ -276,21 +271,50 @@
     </footer>
 
     <!-- ======================================================================
-         INTERACTIVE TECHNICAL MODALS (Triggered from Top Nav or Central Cube)
+         CONTACT INTERACTIVE PANEL (Rises in 3D center after 3s "CONTACTO" show)
+         ====================================================================== -->
+    <div id="contact-interactive-panel" class="contact-interactive-panel" aria-label="Panel de Contacto ASTER">
+        <div class="contact-card-3d-box">
+            <div class="contact-card-header">ASTER SOLUCIONES TÉCNICAS &middot; LÍNEA DIRECTA 24H</div>
+            <div class="contact-card-number">675 38 75 75</div>
+            
+            <div class="contact-actions-row">
+                <!-- Button 1: Copy phone number with 3D push-back & glow -->
+                <button type="button" id="btn-copy-phone" class="btn-copy-phone btn-push-3d">
+                    <span>📋</span> <span data-i18n="contact_copy_btn">COPIAR NÚMERO</span>
+                </button>
+
+                <!-- Button 2: WhatsApp Direct Link with logo_whats.png and 3D push-back & glow -->
+                <a href="https://wa.me/34675387575?text=Hola%20ASTER,%20necesito%20asistencia%20técnica%20para%20instalación%20frigorífica." 
+                   target="_blank" rel="noopener noreferrer" id="btn-whatsapp-direct" class="btn-whatsapp-direct btn-push-3d">
+                    <img src="logo_whats.png" alt="WhatsApp ASTER" class="wa-hat-icon">
+                    <span data-i18n="contact_whatsapp_btn">WHATSAPP DIRECTO</span>
+                </a>
+
+                <!-- Button 3: ATRÁS (Replaces Rebuild Cube) with 3D push-back & glow -->
+                <button type="button" id="btn-back-contact" class="btn-back-contact btn-push-3d" data-i18n="contact_back_btn">
+                    ATRÁS
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================================================================
+         INTERACTIVE TECHNICAL MODALS
          ====================================================================== -->
 
-    <!-- MODAL 1: REPARAR (Triggered by Cube Left Face or Button) -->
+    <!-- MODAL 1: REPARAR -->
     <div id="modal-reparar" class="aster-modal-overlay">
         <div class="aster-modal-window">
             <header class="modal-header-bar">
                 <div class="modal-title-wrap">
                     <span class="modal-sec-code">SEC // 01</span>
-                    <h3 class="modal-title">SERVICIO DE REPARACIÓN DE URGENCIA 24/7</h3>
+                    <h3 class="modal-title" data-i18n="modal_reparar_title">SERVICIO DE REPARACIÓN DE URGENCIA 24/7</h3>
                 </div>
                 <button class="modal-close" title="Cerrar">&times;</button>
             </header>
             <div class="modal-content-body">
-                <p class="modal-intro-text">
+                <p class="modal-intro-text" data-i18n="modal_reparar_intro">
                     Despliegue inmediato de unidades móviles de guardia técnica de ASTER. Diagnóstico termodinámico in situ, reparación de fugas, central de compresores y cámaras frigoríficas.
                 </p>
 
@@ -320,20 +344,11 @@
                     </div>
 
                     <div class="form-tech-group">
-                        <label>Nivel de Criticidad</label>
-                        <select class="form-tech-select" required>
-                            <option value="critico">CRÍTICA 24H: Riesgo inminente de pérdida de producto perecedero</option>
-                            <option value="alta">ALTA: Instalación en régimen degradado</option>
-                            <option value="normal">ESTÁNDAR: Asistencia técnica programada</option>
-                        </select>
-                    </div>
-
-                    <div class="form-tech-group">
                         <label>Ubicación / Polígono Industrial & Teléfono de Contacto</label>
-                        <input type="text" class="form-tech-input" placeholder="Ej: Pol. Ind. Oeste, Nave 14 - Tel: 600 000 000" required>
+                        <input type="text" class="form-tech-input" placeholder="Ej: Pol. Ind., Nave 14 - Tel: 675 38 75 75" required>
                     </div>
 
-                    <button type="submit" class="btn-action-primary" style="width: 100%; margin-top: 10px;">
+                    <button type="submit" class="btn-action-primary" style="width: 100%; margin-top: 10px;" data-i18n="modal_reparar_btn">
                         SOLICITAR DESPACHO TÉCNICO INMEDIATO
                     </button>
                 </form>
@@ -343,19 +358,19 @@
         </div>
     </div>
 
-    <!-- MODAL 2: SUSTITUIR (Triggered by Cube Top Face) -->
+    <!-- MODAL 2: SUSTITUIR -->
     <div id="modal-sustituir" class="aster-modal-overlay">
         <div class="aster-modal-window">
             <header class="modal-header-bar">
                 <div class="modal-title-wrap">
-                    <span class="modal-sec-code">SEC // 02</span>
-                    <h3 class="modal-title">PLAN RENOVE F-GAS & SUSTITUCIÓN ENERGÉTICA</h3>
+                    <span class="modal-sec-code">SEC // 03</span>
+                    <h3 class="modal-title" data-i18n="modal_sustituir_title">PLAN RENOVE F-GAS & SUSTITUCIÓN ECOLÓGICA</h3>
                 </div>
                 <button class="modal-close" title="Cerrar">&times;</button>
             </header>
             <div class="modal-content-body">
-                <p class="modal-intro-text">
-                    Auditoría de reconversión de gases con alto potencial de calentamiento global (GWP) hacia tecnologías sostenibles de CO2 Transcrítico (R-744), Propano (R-290) y mezclas HFO A2L según normativa europea F-Gas.
+                <p class="modal-intro-text" data-i18n="modal_sustituir_intro">
+                    Auditoría de reconversión hacia tecnologías de bajo GWP: CO2 Transcrítico (R-744), Propano (R-290) y fluidos A2L según directiva europea F-Gas.
                 </p>
 
                 <div style="background: rgba(12,25,40,0.7); padding: 16px; border: 1px solid rgba(0,210,255,0.25); margin-bottom: 16px;">
@@ -385,19 +400,19 @@
         </div>
     </div>
 
-    <!-- MODAL 3: MANTENIMIENTO (Triggered by Cube Right Face) -->
+    <!-- MODAL 3: MANTENIMIENTO -->
     <div id="modal-mantenimiento" class="aster-modal-overlay">
         <div class="aster-modal-window">
             <header class="modal-header-bar">
                 <div class="modal-title-wrap">
-                    <span class="modal-sec-code">SEC // 03</span>
-                    <h3 class="modal-title">PLANES PREVENTIVOS ASTER SHIELD</h3>
+                    <span class="modal-sec-code">SEC // 02</span>
+                    <h3 class="modal-title" data-i18n="modal_mantenimiento_title">PLANES PREVENTIVOS ASTER SHIELD</h3>
                 </div>
                 <button class="modal-close" title="Cerrar">&times;</button>
             </header>
             <div class="modal-content-body">
-                <p class="modal-intro-text">
-                    Garantice la continuidad operativa de su cadena de frío. Control de fugas reglamentario (RSIF), análisis tribológico de aceites, termografía infrarroja y calibración de sondas.
+                <p class="modal-intro-text" data-i18n="modal_mantenimiento_intro">
+                    Asegure la máxima fiabilidad de su cadena de frío. Control de fugas reglamentario (RSIF), análisis de aceites, termografía y calibración de sondas.
                 </p>
 
                 <div class="contracts-tier-grid">
@@ -412,7 +427,7 @@
                                 <li>Revisión de seguridades y presostatos</li>
                             </ul>
                         </div>
-                        <button class="btn-quote-req" onclick="window.asterUI.requestProductQuote('shield-basico', 'Plan Shield Básico')">SOLICITAR PROPUESTA</button>
+                        <button class="btn-quote-req" onclick="alert('Solicitud enviada para Plan Shield Básico. Contactaremos al 675 38 75 75.')">SOLICITAR PROPUESTA</button>
                     </div>
 
                     <div class="contract-card featured">
@@ -428,7 +443,7 @@
                                 <li>Asistencia técnica 24h los 365 días</li>
                             </ul>
                         </div>
-                        <button class="btn-action-primary" style="font-size: 11px; padding: 8px 12px;" onclick="window.asterUI.requestProductQuote('cryo-pro', 'Plan Cryo Pro 24/7')">CONTRATAR COBERTURA</button>
+                        <button class="btn-action-primary" style="font-size: 11px; padding: 8px 12px;" onclick="alert('Solicitud enviada para Plan Cryo Pro 24/7. Contactaremos al 675 38 75 75.')">CONTRATAR COBERTURA</button>
                     </div>
 
                     <div class="contract-card">
@@ -442,20 +457,89 @@
                                 <li>Garantía de stock crítico en nave</li>
                             </ul>
                         </div>
-                        <button class="btn-quote-req" onclick="window.asterUI.requestProductQuote('ultra-industrial', 'Plan Ultra Industrial')">CONSULTAR AUDITORÍA</button>
+                        <button class="btn-quote-req" onclick="alert('Solicitud enviada para Plan Ultra Industrial. Contactaremos al 675 38 75 75.')">CONSULTAR AUDITORÍA</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- MODAL 4: AVERÍAS (Triggered from Top Nav Button) -->
+    <!-- MODAL 4: EFICIENCIA -->
+    <div id="modal-eficiencia" class="aster-modal-overlay">
+        <div class="aster-modal-window">
+            <header class="modal-header-bar">
+                <div class="modal-title-wrap">
+                    <span class="modal-sec-code">SEC // 05</span>
+                    <h3 class="modal-title" data-i18n="modal_eficiencia_title">OPTIMIZACIÓN ENERGÉTICA & RETROFIT INVERTER</h3>
+                </div>
+                <button class="modal-close" title="Cerrar">&times;</button>
+            </header>
+            <div class="modal-content-body">
+                <p class="modal-intro-text" data-i18n="modal_eficiencia_intro">
+                    Convierta sus máquinas e instalaciones frigoríficas existentes en sistemas INVERTER de alta eficiencia. Regulación electrónica micrométrica con válvulas termostáticas electrónicas y variadores de frecuencia.
+                </p>
+
+                <div class="inverter-pillars-grid">
+                    <div class="inverter-pillar-card">
+                        <h4>1. VÁLVULAS DE EXPANSIÓN ELECTRÓNICAS</h4>
+                        <p>
+                            Sustitución de válvulas mecánicas por válvulas electrónicas de pulsos (PWM) o motor paso a paso (Danfoss AKV / Carel ExV).
+                        </p>
+                        <ul>
+                            <li>Control exacto del recalentamiento (SH) a 3-5 K</li>
+                            <li>Evita golpes de líquido y roturas de compresor</li>
+                            <li>Permite condensación flotante en invierno</li>
+                            <li>Ahorro directo de hasta un 18% en consumo</li>
+                        </ul>
+                    </div>
+
+                    <div class="inverter-pillar-card">
+                        <h4>2. VARIADORES DE FRECUENCIA (INVERTER)</h4>
+                        <p>
+                            Instalación de variadores de velocidad específicos para refrigeración (Danfoss VLT Refrigeration Drive / Schneider Altivar).
+                        </p>
+                        <ul>
+                            <li>Modulación continua de 25 Hz a 70 Hz según demanda</li>
+                            <li>Eliminación de arranques bruscos (Soft-Start)</li>
+                            <li>Menor desgaste mecánico y vibraciones en pistones</li>
+                            <li>Ahorro conjunto global de un 25% a 40% eléctrico</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="background: rgba(12,25,40,0.7); padding: 16px; border: 1px solid rgba(0,210,255,0.25);">
+                    <h4 style="font-family: var(--font-orbitron); color: #00d2ff; font-size: 13px; margin-bottom: 12px;">CALCULADORA DE CONVERSIÓN A SISTEMA INVERTER</h4>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+                        <div class="form-tech-group">
+                            <label>Potencia Compresor (kW)</label>
+                            <input type="number" id="calc-inv-power" class="form-tech-input" value="30" min="3" max="250">
+                        </div>
+                        <div class="form-tech-group">
+                            <label>Horas Funcionamiento/Día</label>
+                            <input type="number" id="calc-inv-hours" class="form-tech-input" value="16" min="4" max="24">
+                        </div>
+                        <div class="form-tech-group">
+                            <label>Precio Electricidad (€/kWh)</label>
+                            <input type="number" id="calc-inv-kwh-price" class="form-tech-input" value="0.18" step="0.01" min="0.05" max="0.50">
+                        </div>
+                    </div>
+                    <button type="button" id="btn-calc-inverter" class="btn-action-primary" style="margin-top: 8px;">
+                        CALCULAR AHORRO INVERTER & RETORNO DE INVERSIÓN
+                    </button>
+                </div>
+
+                <div id="efficiency-calc-result" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 5: AVERÍAS -->
     <div id="modal-averias" class="aster-modal-overlay">
         <div class="aster-modal-window">
             <header class="modal-header-bar">
                 <div class="modal-title-wrap">
                     <span class="modal-sec-code">RADAR // 24H</span>
-                    <h3 class="modal-title">CENTRAL DE INCIDENCIAS & EMERGENCIAS</h3>
+                    <h3 class="modal-title" data-i18n="modal_averias_title">CENTRAL DE INCIDENCIAS & EMERGENCIAS 24H</h3>
                 </div>
                 <button class="modal-close" title="Cerrar">&times;</button>
             </header>
@@ -463,10 +547,10 @@
                 <div style="display: flex; gap: 20px; align-items: center; background: rgba(255,51,102,0.1); border: 1px solid var(--color-alert-red); padding: 18px; margin-bottom: 20px;">
                     <div style="font-size: 38px;">🚨</div>
                     <div>
-                        <h4 style="font-family: var(--font-orbitron); color: #ffffff; margin-bottom: 4px;">LÍNEA DIRECTA DE ASISTENCIA 24 HORAS</h4>
+                        <h4 style="font-family: var(--font-orbitron); color: #ffffff; margin-bottom: 4px;" data-i18n="modal_averias_hotline">LÍNEA DIRECTA DE ASISTENCIA 24 HORAS</h4>
                         <p style="font-size: 13px; color: var(--color-gray-silver);">Para plantas industriales, almacenes logísticos y centros de distribución alimentaria.</p>
-                        <div style="font-family: var(--font-mono); font-size: 22px; font-weight: 700; color: #ff3366; margin-top: 6px;">
-                            +34 900 834 210 &middot; PRIORIDAD 1
+                        <div style="font-family: var(--font-mono); font-size: 26px; font-weight: 700; color: #ff3366; margin-top: 6px;">
+                            675 38 75 75 &middot; ATENCIÓN DIRECTA
                         </div>
                     </div>
                 </div>
@@ -478,7 +562,7 @@
                     </div>
                     <div style="background: rgba(14,26,42,0.7); padding: 12px; border-left: 2px solid #00d2ff;">
                         <span style="font-family: var(--font-mono); font-size: 10px; color: var(--color-gray-light); display: block;">TIEMPO MEDIO LLEGADA</span>
-                        <strong style="font-size: 18px; color: #00ffcc;">38 MINUTOS</strong>
+                        <strong style="font-size: 18px; color: #00ffcc;">&lt; 38 MINUTOS</strong>
                     </div>
                     <div style="background: rgba(14,26,42,0.7); padding: 12px; border-left: 2px solid #00d2ff;">
                         <span style="font-family: var(--font-mono); font-size: 10px; color: var(--color-gray-light); display: block;">RESOLUCIÓN PRIMER CONTACTO</span>
@@ -486,26 +570,26 @@
                     </div>
                 </div>
 
-                <button class="btn-action-primary" style="width: 100%;" onclick="window.asterUI.openModal('reparar')">
+                <button class="btn-action-primary" style="width: 100%;" onclick="window.asterUI.openModal('reparar')" data-i18n="modal_averias_btn">
                     ABRIR PARTE DE AVERÍA URGENTE ONLINE
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- MODAL 5: CONTRATOS -->
+    <!-- MODAL 6: CONTRATOS -->
     <div id="modal-contratos" class="aster-modal-overlay">
         <div class="aster-modal-window">
             <header class="modal-header-bar">
                 <div class="modal-title-wrap">
                     <span class="modal-sec-code">SLA // ACC</span>
-                    <h3 class="modal-title">ACUERDOS DE NIVEL DE SERVICIO (SLA)</h3>
+                    <h3 class="modal-title" data-i18n="modal_contratos_title">ACUERDOS DE NIVEL DE SERVICIO (SLA)</h3>
                 </div>
                 <button class="modal-close" title="Cerrar">&times;</button>
             </header>
             <div class="modal-content-body">
-                <p class="modal-intro-text">
-                    Contratos de mantenimiento y soporte frigorífico diseñados a medida para cadenas de supermercados, industria cárnica, logística portuaria y farmacéutica.
+                <p class="modal-intro-text" data-i18n="modal_contratos_intro">
+                    Mantenimiento especializado para industria alimentaria, cadenas logísticas y sector farmacéutico con monitorización continua y respuesta prioritaria.
                 </p>
                 <div class="contracts-tier-grid">
                     <div class="contract-card">
@@ -519,7 +603,7 @@
                                 <li>Sustitución de gases fluorados</li>
                             </ul>
                         </div>
-                        <button class="btn-quote-req" onclick="window.asterUI.requestProductQuote('contrato-alimentos', 'Contrato Sector Alimentario')">SOLICITAR ASESORÍA</button>
+                        <button class="btn-quote-req" onclick="alert('Solicitud enviada para Contrato Alimentario. Contactaremos al 675 38 75 75.')">SOLICITAR ASESORÍA</button>
                     </div>
 
                     <div class="contract-card featured">
@@ -533,7 +617,7 @@
                                 <li>Respuesta crítica prioritaria &lt; 60 min</li>
                             </ul>
                         </div>
-                        <button class="btn-action-primary" style="font-size: 11px; padding: 8px 12px;" onclick="window.asterUI.requestProductQuote('contrato-pharma', 'Contrato Pharma GMP')">CONTRATAR PROTOCOLO</button>
+                        <button class="btn-action-primary" style="font-size: 11px; padding: 8px 12px;" onclick="alert('Solicitud enviada para Contrato Pharma GMP. Contactaremos al 675 38 75 75.')">CONTRATAR PROTOCOLO</button>
                     </div>
 
                     <div class="contract-card">
@@ -546,80 +630,7 @@
                                 <li>Planes de eficiencia energética ISO 50001</li>
                             </ul>
                         </div>
-                        <button class="btn-quote-req" onclick="window.asterUI.requestProductQuote('contrato-logistica', 'Contrato Logística y Puertos')">PEDIR ESTUDIO</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL 6: TIENDA (CATÁLOGO INDUSTRIAL) -->
-    <div id="modal-tienda" class="aster-modal-overlay">
-        <div class="aster-modal-window" style="max-width: 960px;">
-            <header class="modal-header-bar">
-                <div class="modal-title-wrap">
-                    <span class="modal-sec-code">CAT // 2026</span>
-                    <h3 class="modal-title">RECAMBIOS & COMPONENTES FRIGORÍFICOS</h3>
-                </div>
-                <button class="modal-close" title="Cerrar">&times;</button>
-            </header>
-            <div class="modal-content-body">
-                <div class="shop-controls-bar">
-                    <button class="shop-filter-btn active" data-filter="all">TODOS</button>
-                    <button class="shop-filter-btn" data-filter="compresores">COMPRESORES</button>
-                    <button class="shop-filter-btn" data-filter="valvulas">VÁLVULAS & EXPANSIÓN</button>
-                    <button class="shop-filter-btn" data-filter="controles">ELECTRÓNICA & CONTROL</button>
-                    <button class="shop-filter-btn" data-filter="gases">GASES & LUBRICANTES</button>
-                    <input type="text" id="shop-search" class="shop-search-input" placeholder="Buscar por referencia, modelo o marca...">
-                </div>
-
-                <div id="shop-product-grid" class="shop-grid"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL 7: CONTACTO -->
-    <div id="modal-contacto" class="aster-modal-overlay">
-        <div class="aster-modal-window">
-            <header class="modal-header-bar">
-                <div class="modal-title-wrap">
-                    <span class="modal-sec-code">HQ // DIR</span>
-                    <h3 class="modal-title">CENTRAL TÉCNICA & COMUNICACIONES</h3>
-                </div>
-                <button class="modal-close" title="Cerrar">&times;</button>
-            </header>
-            <div class="modal-content-body">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                    <div>
-                        <h4 style="font-family: var(--font-orbitron); color: #00d2ff; font-size: 14px; margin-bottom: 12px;">SEDE CENTRAL</h4>
-                        <p style="font-size: 13px; margin-bottom: 8px;"><strong>ASTER Soluciones Técnicas </strong></p>
-                        <p style="font-size: 13px; color: var(--color-gray-silver); margin-bottom: 4px;">Polígono Industrial La Moraga, Aster Soluciones Técnicas</p>
-                        <p style="font-size: 13px; color: var(--color-gray-silver); margin-bottom: 16px;">29130 / Alhaurín de la Torre</p>
-
-                        <div style="font-family: var(--font-mono); font-size: 12px; color: var(--color-blue-ice); line-height: 1.8;">
-                            <div>TEL. CENTRAL: <strong>+34 675 38 75 75</strong></div>
-                            <div>URGENCIAS 24H: <strong>+34 675 38 75 75</strong></div>
-                            <div>INGENIERÍA: <strong>info@astersat.es</strong></div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <h4 style="font-family: var(--font-orbitron); color: #00d2ff; font-size: 14px; margin-bottom: 12px;">MENSAJE DIRECTO</h4>
-                        <form onsubmit="event.preventDefault(); alert('Mensaje transmitido a la central técnica de ASTER. Nos pondremos en contacto en breve.'); window.asterUI.closeActiveModal();">
-                            <div class="form-tech-group">
-                                <label>Empresa / Contacto</label>
-                                <input type="text" class="form-tech-input" placeholder="Nombre de la empresa" required>
-                            </div>
-                            <div class="form-tech-group">
-                                <label>Email Corporativo</label>
-                                <input type="email" class="form-tech-input" placeholder="email@empresa.com" required>
-                            </div>
-                            <div class="form-tech-group">
-                                <label>Consulta Técnica</label>
-                                <textarea class="form-tech-textarea" placeholder="Describa su necesidad técnica..."></textarea>
-                            </div>
-                            <button type="submit" class="btn-action-primary" style="width: 100%;">ENVIAR CONSULTA</button>
-                        </form>
+                        <button class="btn-quote-req" onclick="alert('Solicitud enviada para Contrato Logística. Contactaremos al 675 38 75 75.')">PEDIR ESTUDIO</button>
                     </div>
                 </div>
             </div>
@@ -627,11 +638,12 @@
     </div>
 
     <!-- ======================================================================
-         SCRIPTS: THREE.JS, AUDIO, TELEMETRY, 3D SCENE & UI CONTROLLER
+         SCRIPTS
          ====================================================================== -->
     <script src="js/vendor/three.min.js"></script>
     <script src="js/vendor/OrbitControls.js"></script>
     <script src="js/audio-system.js"></script>
+    <script src="js/i18n.js"></script>
     <script src="js/telemetry.js"></script>
     <script src="js/three-scene.js"></script>
     <script src="js/main.js"></script>

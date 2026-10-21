@@ -1,7 +1,12 @@
 /* ==========================================================================
    ASTER Soluciones Técnicas - Futuristic Industrial Cryogenic Interface
-   Strict Icy Color Palette: Pure White, Steel Gray, Cryo Blue, Deep Black
-   Inspired by PS2 Startup Interface & Industrial Refrigeration Systems
+   Strict Icy Palette: Pure White, Steel Gray, Cryo Blue, Deep Black
+   Optimized for Refrigeration Engineering (HVAC-R Technicians):
+   - Mollier (p-h) Diagram Animation
+   - Electronic Expansion Valve (EEV)
+   - Dual Digital Manifold (Low & High Pressure Gauges)
+   - Frequency Inverter Drive (Hz, Amps, Volts, RPM)
+   - 3D Floating Contact Box with Push-Back Button Animations
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&family=Inter:wght@400;500;600&display=swap');
@@ -28,7 +33,8 @@
     --color-white-pure: #ffffff;
     --color-white-frost: #f0f7ff;
 
-    --color-alert-red: #ff3366;
+    --color-gauge-low: #00b4d8;
+    --color-gauge-high: #ff4d6d;
     --color-alert-amber: #ffaa00;
     --color-success-cyan: #00ffcc;
 
@@ -36,27 +42,27 @@
     --font-orbitron: 'Orbitron', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-rajdhani: 'Rajdhani', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-mono: 'Share Tech Mono', 'Courier New', monospace;
-    --font-body: 'Inter', sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 
     /* Spacing & Z-Index */
-    --header-height: 72px;
+    --header-height: 70px;
     --z-background: 0;
     --z-3d-canvas: 10;
     --z-hud-overlay: 20;
     --z-header: 30;
+    --z-contact-card: 45;
     --z-modal: 50;
     --z-crt: 90;
 }
 
-/* --------------------------------------------------------------------------
-   Reset & Base Styles
-   -------------------------------------------------------------------------- */
+/* Reset & Base Styles */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     user-select: none;
     -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 html, body {
@@ -72,9 +78,7 @@ html, body {
     cursor: default;
 }
 
-/* --------------------------------------------------------------------------
-   3D Canvas Container
-   -------------------------------------------------------------------------- */
+/* 3D Canvas Container */
 #webgl-container {
     position: fixed;
     top: 0;
@@ -84,11 +88,10 @@ html, body {
     z-index: var(--z-3d-canvas);
     background: radial-gradient(circle at 50% 50%, #061122 0%, #03070f 75%, #010307 100%);
     overflow: hidden;
+    touch-action: none;
 }
 
-/* --------------------------------------------------------------------------
-   CRT / Scanline Effect Overlay (Toggleable)
-   -------------------------------------------------------------------------- */
+/* CRT Overlay */
 #crt-screen-overlay {
     position: fixed;
     top: 0;
@@ -108,9 +111,7 @@ html, body {
     opacity: 1;
 }
 
-/* --------------------------------------------------------------------------
-   Industrial Visor Outer Frame & Icicle Borders
-   -------------------------------------------------------------------------- */
+/* Industrial Outer Visor Frame */
 .hud-visor-frame {
     position: fixed;
     top: 0;
@@ -121,7 +122,6 @@ html, body {
     z-index: var(--z-hud-overlay);
 }
 
-/* Side metallic pillars */
 .hud-pillar-left, .hud-pillar-right {
     position: absolute;
     top: 0;
@@ -172,14 +172,14 @@ html, body {
     top: var(--header-height);
     left: 0;
     width: 100%;
-    height: 38px;
+    height: 34px;
     pointer-events: none;
     z-index: 25;
     filter: drop-shadow(0 4px 6px rgba(0, 210, 255, 0.35));
 }
 
 /* --------------------------------------------------------------------------
-   Top Industrial Metallic Control Panel (Header)
+   Top Industrial Control Panel (Header)
    -------------------------------------------------------------------------- */
 .top-industrial-header {
     position: fixed;
@@ -194,10 +194,9 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 28px;
+    padding: 0 24px;
 }
 
-/* Metallic texture highlights */
 .top-industrial-header::before {
     content: '';
     position: absolute;
@@ -208,20 +207,20 @@ html, body {
     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
 }
 
-/* Logo: ASTER Soluciones Técnicas */
+/* Logo */
 .header-logo-container {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 12px;
     text-decoration: none;
     color: inherit;
     cursor: pointer;
+    flex-shrink: 0;
 }
 
 .logo-cryo-icon {
-    width: 38px;
-    height: 38px;
-    position: relative;
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -233,8 +232,8 @@ html, body {
 
 .logo-cryo-icon svg {
     transform: rotate(-45deg);
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
     fill: var(--color-blue-cyan);
     filter: drop-shadow(0 0 4px #00d2ff);
 }
@@ -246,9 +245,9 @@ html, body {
 
 .logo-brand-name {
     font-family: var(--font-orbitron);
-    font-size: 20px;
+    font-size: 19px;
     font-weight: 900;
-    letter-spacing: 2.5px;
+    letter-spacing: 2px;
     color: var(--color-white-pure);
     text-shadow: 0 0 10px rgba(0, 210, 255, 0.8);
     display: flex;
@@ -265,13 +264,14 @@ html, body {
     font-family: var(--font-rajdhani);
     font-size: 11px;
     font-weight: 600;
-    letter-spacing: 1.8px;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
     color: var(--color-blue-ice);
     opacity: 0.85;
+    white-space: nowrap;
 }
 
-/* Header Navigation Buttons */
+/* Header Navigation */
 .header-nav-buttons {
     display: flex;
     align-items: center;
@@ -284,16 +284,16 @@ html, body {
     border: 1px solid rgba(0, 210, 255, 0.35);
     color: var(--color-gray-silver);
     font-family: var(--font-orbitron);
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
-    letter-spacing: 1.5px;
-    padding: 8px 18px;
+    letter-spacing: 1.2px;
+    padding: 8px 16px;
     text-transform: uppercase;
     cursor: pointer;
     transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     clip-path: polygon(8px 0%, 100% 0%, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0% 100%, 0% 8px);
 }
 
@@ -312,16 +312,6 @@ html, body {
     transform: translateY(-1px);
 }
 
-.nav-tech-btn:active {
-    transform: translateY(1px);
-    box-shadow: 0 0 8px rgba(0, 210, 255, 0.6);
-}
-
-/* Alert badge for Averías */
-.nav-tech-btn.urgent-indicator {
-    border-color: rgba(255, 60, 90, 0.6);
-}
-
 .nav-tech-btn.urgent-indicator::after {
     content: '';
     width: 6px;
@@ -337,11 +327,12 @@ html, body {
     50% { opacity: 0.3; transform: scale(0.8); }
 }
 
-/* Header Utilities: Sound, CRT, Clock */
+/* Header Utilities */
 .header-system-controls {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 10px;
+    flex-shrink: 0;
 }
 
 .system-tool-btn {
@@ -355,7 +346,7 @@ html, body {
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     border-radius: 2px;
     transition: all 0.2s ease;
 }
@@ -366,45 +357,40 @@ html, body {
     background: #17273d;
 }
 
-/* Mini Audio Equalizer Visualizer */
-.eq-bars-mini {
-    display: flex;
-    align-items: flex-end;
-    gap: 2px;
-    height: 12px;
+.lang-toggle-btn {
+    background: #102135;
+    border: 1.5px solid var(--color-blue-cyan);
+    color: #ffffff;
+    font-family: var(--font-orbitron);
+    font-size: 12px;
+    font-weight: 800;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 2px;
+    letter-spacing: 1px;
+    box-shadow: 0 0 8px rgba(0, 210, 255, 0.35);
+    transition: all 0.2s ease;
 }
 
-.eq-bar {
-    width: 2px;
+.lang-toggle-btn:hover {
     background: var(--color-blue-cyan);
-    border-radius: 1px;
-    animation: eq-anim 0.8s ease-in-out infinite alternate;
+    color: #030812;
+    box-shadow: 0 0 16px rgba(0, 210, 255, 0.7);
 }
 
-.eq-bar:nth-child(1) { height: 40%; animation-delay: 0.1s; }
-.eq-bar:nth-child(2) { height: 90%; animation-delay: 0.3s; }
-.eq-bar:nth-child(3) { height: 60%; animation-delay: 0.2s; }
-.eq-bar:nth-child(4) { height: 100%; animation-delay: 0.4s; }
-
-@keyframes eq-anim {
-    0% { height: 25%; }
-    100% { height: 100%; }
-}
-
-/* Digital Live Clock */
 .header-clock-module {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     background: rgba(8, 18, 31, 0.85);
     border: 1px solid rgba(0, 210, 255, 0.25);
-    padding: 4px 12px;
+    padding: 4px 10px;
     border-radius: 2px;
 }
 
 .clock-digits {
     font-family: var(--font-mono);
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 700;
     color: var(--color-white-pure);
     letter-spacing: 1px;
@@ -415,36 +401,46 @@ html, body {
     font-family: var(--font-mono);
     font-size: 9px;
     color: var(--color-gray-light);
-    letter-spacing: 0.5px;
 }
 
-/* Mobile menu toggle */
 .mobile-menu-btn {
     display: none;
-    background: transparent;
+    background: #112034;
     border: 1px solid var(--color-blue-cyan);
     color: var(--color-blue-cyan);
+    padding: 6px 12px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.mobile-hud-toggle {
+    display: none;
+    background: rgba(8, 20, 36, 0.85);
+    border: 1px solid var(--color-blue-cyan);
+    color: var(--color-blue-ice);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
     padding: 6px 10px;
-    font-size: 18px;
     cursor: pointer;
 }
 
-/* --------------------------------------------------------------------------
-   HUD & Telemetry Edge Panels (Matching reference.jpg)
-   -------------------------------------------------------------------------- */
+/* ==========================================================================
+   REFRIGERATION ENGINEERING HUD MODULES
+   ========================================================================== */
 .hud-corner-panel {
     position: fixed;
     z-index: var(--z-hud-overlay);
-    background: rgba(6, 15, 27, 0.78);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(0, 210, 255, 0.3);
-    padding: 12px 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), inset 0 0 12px rgba(0, 210, 255, 0.08);
+    background: rgba(6, 15, 27, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 210, 255, 0.35);
+    padding: 12px 14px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.7), inset 0 0 14px rgba(0, 210, 255, 0.08);
     pointer-events: auto;
 }
 
-/* Industrial Corner Brackets for HUD */
 .hud-corner-panel::before {
     content: '';
     position: absolute;
@@ -481,186 +477,202 @@ html, body {
     align-items: center;
 }
 
-/* 1. TOP-LEFT PANEL */
+/* 1. TOP-LEFT: DIAGRAMA DE MOLLIER (p-h) */
 .hud-top-left {
-    top: calc(var(--header-height) + 18px);
-    left: 48px;
-    width: 250px;
-}
-
-.telemetry-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--color-gray-silver);
-    margin-bottom: 6px;
-}
-
-.telemetry-bar-wrap {
-    flex: 1;
-    height: 6px;
-    background: rgba(20, 35, 55, 0.8);
-    border: 1px solid rgba(0, 210, 255, 0.3);
-    margin: 0 10px;
-    overflow: hidden;
-}
-
-.telemetry-bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #0088cc, #00d2ff);
-    box-shadow: 0 0 4px #00d2ff;
-}
-
-.telemetry-val {
-    color: var(--color-white-pure);
-    font-weight: 700;
-}
-
-/* 2. BOTTOM-LEFT PANEL (Lecturas & PS2 Controller Prompts) */
-.hud-bottom-left {
-    bottom: 24px;
+    top: calc(var(--header-height) + 14px);
     left: 48px;
     width: 270px;
 }
 
-.sensor-spectrum-container {
-    display: flex;
-    align-items: flex-end;
-    gap: 6px;
-    height: 44px;
-    margin: 10px 0;
-    padding: 6px;
-    background: rgba(10, 22, 38, 0.6);
-    border: 1px solid rgba(0, 210, 255, 0.15);
-}
-
-.hud-bar-col {
-    flex: 1;
-    height: 100%;
-    display: flex;
-    align-items: flex-end;
-}
-
-.hud-bar-fill {
+#mollier-canvas {
     width: 100%;
-    background: linear-gradient(180deg, #00f0ff 0%, #0077b6 100%);
-    box-shadow: 0 0 6px rgba(0, 210, 255, 0.5);
-    transition: height 0.18s ease-out;
-}
-
-/* PS2 Controller Legend */
-.ps2-controller-hints {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 10px;
-    border-top: 1px solid rgba(0, 210, 255, 0.2);
-    padding-top: 8px;
-}
-
-.ps2-btn-hint {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-family: var(--font-orbitron);
-    font-size: 10px;
-    font-weight: 700;
-    color: var(--color-gray-silver);
-    letter-spacing: 1px;
-}
-
-.ps2-glyph {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-    font-weight: 900;
-    background: #112033;
-    border: 1px solid #4a678a;
-}
-
-.ps2-glyph.cross {
-    color: #4facfe;
-    border-color: #00d2ff;
-    box-shadow: 0 0 4px #00d2ff;
-}
-
-.ps2-glyph.circle {
-    color: #ff5e7e;
-    border-color: #ff3366;
-}
-
-/* 3. TOP-RIGHT PANEL (Telemetry & Frequencies) */
-.hud-top-right {
-    top: calc(var(--header-height) + 18px);
-    right: 48px;
-    width: 250px;
-}
-
-.hud-mini-spectrum {
-    display: flex;
-    gap: 3px;
-    height: 22px;
-    align-items: flex-end;
+    height: 105px;
+    display: block;
+    background: #040a12;
+    border: 1px solid rgba(0, 210, 255, 0.2);
     margin-bottom: 8px;
 }
 
-.hud-mini-bar {
-    flex: 1;
-    background: var(--color-blue-cyan);
-    opacity: 0.75;
-}
-
-.diag-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4px;
+.mollier-legend-row {
+    display: flex;
+    justify-content: space-between;
     font-family: var(--font-mono);
     font-size: 10px;
     color: var(--color-gray-silver);
 }
 
-.diag-grid span strong {
+.mollier-legend-row span strong {
     color: var(--color-white-pure);
 }
 
-/* 4. BOTTOM-RIGHT PANEL (Oscilloscope & Refrigerant Flow) */
-.hud-bottom-right {
-    bottom: 24px;
+/* 2. BOTTOM-LEFT: VÁLVULA DE EXPANSIÓN ELECTRÓNICA (EEV) */
+.hud-bottom-left {
+    bottom: 22px;
+    left: 48px;
+    width: 270px;
+}
+
+.eev-display-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.eev-stat-box {
+    background: rgba(12, 23, 37, 0.7);
+    border: 1px solid rgba(0, 210, 255, 0.2);
+    padding: 6px 8px;
+}
+
+.eev-stat-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--color-gray-light);
+}
+
+.eev-stat-val {
+    font-family: var(--font-orbitron);
+    font-size: 14px;
+    font-weight: 800;
+    color: #00f0ff;
+}
+
+.eev-gauge-bar {
+    width: 100%;
+    height: 6px;
+    background: rgba(20, 36, 56, 0.8);
+    border: 1px solid rgba(0, 210, 255, 0.3);
+    margin: 6px 0;
+    overflow: hidden;
+    border-radius: 1px;
+}
+
+.eev-gauge-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #0088cc, #00f0ff);
+    box-shadow: 0 0 6px #00d2ff;
+    transition: width 0.3s ease;
+}
+
+/* 3. TOP-RIGHT: DUAL DIGITAL MANIFOLD (ALTA Y BAJA) */
+.hud-top-right {
+    top: calc(var(--header-height) + 14px);
     right: 48px;
     width: 280px;
 }
 
-#osc-canvas {
-    width: 100%;
-    height: 64px;
-    display: block;
-    border: 1px solid rgba(0, 210, 255, 0.25);
-    background: #050b14;
-    margin: 6px 0;
+.manifold-gauges-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
 }
 
-.refrig-circuit-meter {
+.digital-gauge-card {
+    background: rgba(8, 18, 30, 0.8);
+    padding: 8px;
+    border-radius: 2px;
+    border-top: 3px solid #00d2ff;
+}
+
+.digital-gauge-card.low-side {
+    border-color: var(--color-gauge-low);
+}
+
+.digital-gauge-card.high-side {
+    border-color: var(--color-gauge-high);
+}
+
+.gauge-header-title {
     font-family: var(--font-mono);
-    font-size: 10px;
-    color: var(--color-blue-ice);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+    display: block;
+}
+
+.digital-gauge-card.low-side .gauge-header-title { color: var(--color-gauge-low); }
+.digital-gauge-card.high-side .gauge-header-title { color: var(--color-gauge-high); }
+
+.gauge-press-display {
+    font-family: var(--font-orbitron);
+    font-size: 15px;
+    font-weight: 900;
+    color: var(--color-white-pure);
+    margin-bottom: 4px;
+    display: block;
+}
+
+.gauge-sub-metrics {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--color-gray-silver);
+    line-height: 1.4;
+}
+
+/* 4. BOTTOM-RIGHT: VARIADOR DE FRECUENCIA (INVERTER DRIVE) */
+.hud-bottom-right {
+    bottom: 22px;
+    right: 48px;
+    width: 270px;
+}
+
+.inverter-hero-display {
     display: flex;
     justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 6px;
+    background: rgba(9, 21, 35, 0.85);
+    border: 1px solid rgba(0, 210, 255, 0.25);
+    padding: 6px 10px;
 }
 
-/* 5. BOTTOM-CENTER STATUS CAPSULE */
+.inverter-hz-val {
+    font-family: var(--font-orbitron);
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--color-success-cyan);
+    text-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
+}
+
+.inverter-rpm-val {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-blue-ice);
+}
+
+.inverter-specs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-gray-silver);
+    margin-top: 6px;
+}
+
+.inverter-specs-grid div {
+    background: rgba(14, 26, 42, 0.6);
+    padding: 4px 6px;
+    text-align: center;
+}
+
+.inverter-specs-grid div strong {
+    display: block;
+    color: var(--color-white-pure);
+    font-size: 11px;
+}
+
+/* 5. BOTTOM-CENTER HUD CAPSULE */
 .hud-bottom-center {
     position: fixed;
-    bottom: 24px;
+    bottom: 22px;
     left: 50%;
     transform: translateX(-50%);
     z-index: var(--z-hud-overlay);
-    background: rgba(6, 17, 31, 0.9);
+    background: rgba(6, 17, 31, 0.92);
     border: 1.5px solid var(--color-blue-cyan);
     box-shadow: 0 0 20px rgba(0, 210, 255, 0.45);
     padding: 8px 24px;
@@ -688,7 +700,7 @@ html, body {
 }
 
 .cooling-pulse-bar {
-    width: 80px;
+    width: 70px;
     height: 6px;
     background: #0f2238;
     border: 1px solid rgba(0, 210, 255, 0.4);
@@ -719,8 +731,196 @@ html, body {
     letter-spacing: 1px;
 }
 
+/* ==========================================================================
+   CONTACT CARD HUD OVERLAY (3D FLOATING STRUCTURE & PUSH-BACK ANIMATION)
+   ========================================================================== */
+#contact-interactive-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* Rises smoothly from below to center: initial offscreen position */
+    transform: translate(-50%, calc(-50% + 120px));
+    z-index: var(--z-contact-card);
+    width: 90%;
+    max-width: 580px;
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.65s ease;
+    text-align: center;
+}
+
+/* Active state: Rises into center and accepts all pointer events immediately */
+#contact-interactive-panel.active {
+    opacity: 1;
+    pointer-events: auto !important;
+    transform: translate(-50%, -50%);
+}
+
+/* Lowering / closing state */
+#contact-interactive-panel.closing {
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, calc(-50% + 120px));
+}
+
+/* 3D Box Container: floats in 3D without clashing with the outer transform */
+.contact-card-3d-box {
+    width: 100%;
+    background: linear-gradient(180deg, rgba(16, 28, 44, 0.97) 0%, rgba(7, 16, 27, 0.97) 100%);
+    border: 2px solid var(--color-blue-cyan);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.95),
+                0 0 50px rgba(0, 210, 255, 0.45),
+                inset 0 2px 4px rgba(255, 255, 255, 0.4),
+                inset 0 -3px 8px rgba(0, 0, 0, 0.9);
+    padding: 26px 28px;
+    border-radius: 4px;
+    perspective: 1200px;
+    transform-style: preserve-3d;
+    animation: contact-float-3d 5.0s ease-in-out infinite alternate;
+    pointer-events: auto !important;
+}
+
+/* Subtle 3D floating / levitation on the inner box */
+@keyframes contact-float-3d {
+    0% {
+        transform: perspective(1200px) rotateX(2.5deg) rotateY(-1.2deg) translateY(0px);
+    }
+    100% {
+        transform: perspective(1200px) rotateX(-1.5deg) rotateY(1.2deg) translateY(-14px);
+    }
+}
+
+.contact-card-header {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-blue-cyan);
+    letter-spacing: 1.5px;
+    margin-bottom: 6px;
+    text-shadow: 0 0 8px rgba(0, 210, 255, 0.6);
+}
+
+.contact-card-number {
+    font-family: var(--font-orbitron);
+    font-size: 38px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    color: var(--color-white-pure);
+    text-shadow: 0 0 20px var(--color-blue-cyan), 0 0 40px rgba(0, 210, 255, 0.6);
+    margin: 8px 0 16px;
+}
+
+.contact-actions-row {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 10;
+    pointer-events: auto !important;
+}
+
+/* 3D PUSH-BACK & FLASH GLOW ANIMATION FOR BUTTONS */
+.btn-push-3d {
+    position: relative;
+    z-index: 10;
+    transform: translateZ(0);
+    transition: transform 0.16s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.16s ease, border-color 0.16s ease, filter 0.16s ease;
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.btn-push-3d.btn-pressed-3d {
+    transform: translateZ(-16px) scale(0.92) !important;
+    box-shadow: 0 0 35px #00f0ff, inset 0 0 18px #ffffff, 0 0 60px rgba(0, 210, 255, 0.9) !important;
+    border-color: #ffffff !important;
+    filter: brightness(1.5) !important;
+}
+
+/* Copy Phone Button */
+.btn-copy-phone {
+    background: #14283f;
+    border: 1px solid var(--color-blue-cyan);
+    color: #ffffff;
+    font-family: var(--font-orbitron);
+    font-size: 12px;
+    font-weight: 800;
+    padding: 10px 18px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5), 0 0 12px rgba(0, 210, 255, 0.3);
+}
+
+.btn-copy-phone:hover {
+    background: var(--color-blue-cyan);
+    color: #030812;
+    box-shadow: 0 0 24px rgba(0, 210, 255, 0.7);
+}
+
+.btn-copy-phone.copied {
+    background: var(--color-success-cyan);
+    color: #030812;
+    border-color: var(--color-success-cyan);
+}
+
+/* WhatsApp Direct Button */
+.btn-whatsapp-direct {
+    background: linear-gradient(135deg, #0088cc 0%, #00558f 100%);
+    border: 1.5px solid #00d2ff;
+    color: #ffffff;
+    text-decoration: none;
+    font-family: var(--font-orbitron);
+    font-size: 12px;
+    font-weight: 800;
+    padding: 8px 18px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5), 0 0 16px rgba(0, 210, 255, 0.45);
+}
+
+.btn-whatsapp-direct:hover {
+    background: linear-gradient(135deg, #00a8ff 0%, #0077b6 100%);
+    box-shadow: 0 0 28px rgba(0, 210, 255, 0.8);
+    transform: translateY(-2px);
+}
+
+.wa-hat-icon {
+    width: 32px;
+    height: 32px;
+    display: block;
+    object-fit: contain;
+}
+
+/* ATRÁS Button (Replaces Rebuild Cube) */
+.btn-back-contact {
+    background: rgba(14, 26, 42, 0.8);
+    border: 1px solid rgba(0, 210, 255, 0.45);
+    color: var(--color-blue-ice);
+    font-family: var(--font-orbitron);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    padding: 8px 20px;
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+.btn-back-contact:hover {
+    border-color: var(--color-blue-cyan);
+    color: #ffffff;
+    background: rgba(0, 210, 255, 0.18);
+    box-shadow: 0 0 16px rgba(0, 210, 255, 0.5);
+}
+
 /* --------------------------------------------------------------------------
-   Interactive Modals & Windows
+   Modals
    -------------------------------------------------------------------------- */
 .aster-modal-overlay {
     position: fixed;
@@ -729,7 +929,7 @@ html, body {
     width: 100vw;
     height: 100vh;
     z-index: var(--z-modal);
-    background: rgba(2, 6, 12, 0.75);
+    background: rgba(2, 6, 12, 0.78);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     display: flex;
@@ -738,7 +938,7 @@ html, body {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.25s ease, visibility 0.25s ease;
-    padding: 20px;
+    padding: 18px;
 }
 
 .aster-modal-overlay.active {
@@ -748,8 +948,8 @@ html, body {
 
 .aster-modal-window {
     width: 100%;
-    max-width: 840px;
-    max-height: 85vh;
+    max-width: 860px;
+    max-height: 86vh;
     background: linear-gradient(180deg, #121d2d 0%, #0a1320 100%);
     border: 2px solid var(--color-blue-cyan);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 210, 255, 0.3);
@@ -765,7 +965,6 @@ html, body {
     transform: scale(1) translateY(0);
 }
 
-/* Modal Header */
 .modal-header-bar {
     background: linear-gradient(90deg, #1b2a3f 0%, #111e2e 100%);
     border-bottom: 1px solid rgba(0, 210, 255, 0.4);
@@ -792,9 +991,9 @@ html, body {
 
 .modal-title {
     font-family: var(--font-orbitron);
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 800;
-    letter-spacing: 2px;
+    letter-spacing: 1.5px;
     color: var(--color-white-pure);
     text-shadow: 0 0 8px rgba(0, 210, 255, 0.6);
 }
@@ -816,12 +1015,10 @@ html, body {
 .modal-close:hover {
     border-color: var(--color-alert-red);
     color: var(--color-alert-red);
-    box-shadow: 0 0 10px rgba(255, 51, 102, 0.5);
 }
 
-/* Modal Body */
 .modal-content-body {
-    padding: 24px 28px;
+    padding: 22px 26px;
     overflow-y: auto;
     font-family: var(--font-body);
     font-size: 14px;
@@ -841,19 +1038,17 @@ html, body {
     border-radius: 3px;
 }
 
-/* Modal Subtitle / Intro */
 .modal-intro-text {
     font-family: var(--font-rajdhani);
     font-size: 16px;
     font-weight: 600;
     color: var(--color-blue-ice);
-    margin-bottom: 20px;
+    margin-bottom: 18px;
     line-height: 1.5;
 }
 
-/* Forms in Modals */
 .form-tech-group {
-    margin-bottom: 16px;
+    margin-bottom: 14px;
 }
 
 .form-tech-group label {
@@ -877,7 +1072,7 @@ html, body {
     padding: 10px 14px;
     border-radius: 2px;
     outline: none;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    transition: border-color 0.2s ease;
 }
 
 .form-tech-input:focus, .form-tech-select:focus, .form-tech-textarea:focus {
@@ -890,16 +1085,15 @@ html, body {
     min-height: 80px;
 }
 
-/* Action Buttons in Modals */
 .btn-action-primary {
     background: linear-gradient(90deg, #0088cc 0%, #00d2ff 100%);
     border: none;
     color: #030812;
     font-family: var(--font-orbitron);
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 800;
     letter-spacing: 1.5px;
-    padding: 12px 24px;
+    padding: 12px 22px;
     text-transform: uppercase;
     cursor: pointer;
     box-shadow: 0 0 16px rgba(0, 210, 255, 0.5);
@@ -912,54 +1106,58 @@ html, body {
     transform: translateY(-1px);
 }
 
-/* Result Box for Triage / Repair */
-.result-success-box {
-    background: rgba(0, 255, 204, 0.08);
-    border: 1px solid var(--color-success-cyan);
-    padding: 20px;
-    margin-top: 16px;
+.inverter-pillars-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.inverter-pillar-card {
+    background: rgba(11, 23, 38, 0.85);
+    border: 1px solid rgba(0, 210, 255, 0.3);
+    padding: 18px;
     border-radius: 2px;
-    text-align: center;
 }
 
-.result-success-box .result-icon {
-    font-size: 32px;
-    margin-bottom: 8px;
-}
-
-.result-success-box h4 {
+.inverter-pillar-card h4 {
     font-family: var(--font-orbitron);
-    color: var(--color-success-cyan);
-    margin-bottom: 8px;
-    font-size: 16px;
-}
-
-.result-success-box .ticket-id {
-    font-family: var(--font-mono);
     font-size: 14px;
+    color: #00f0ff;
     margin-bottom: 8px;
-    color: var(--color-white-pure);
 }
 
-.result-success-box .result-telemetry {
-    display: flex;
-    justify-content: space-around;
-    font-family: var(--font-mono);
-    font-size: 11px;
+.inverter-pillar-card p {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--color-gray-silver);
+    margin-bottom: 10px;
+}
+
+.inverter-pillar-card ul {
+    list-style: none;
+    font-size: 12px;
     color: var(--color-blue-ice);
-    margin-top: 14px;
-    border-top: 1px solid rgba(0, 255, 204, 0.2);
-    padding-top: 10px;
 }
 
-/* --------------------------------------------------------------------------
-   Retrofit / Sustituir Calculator Styles
-   -------------------------------------------------------------------------- */
+.inverter-pillar-card ul li {
+    margin-bottom: 6px;
+    padding-left: 14px;
+    position: relative;
+}
+
+.inverter-pillar-card ul li::before {
+    content: '⚡';
+    position: absolute;
+    left: 0;
+    font-size: 10px;
+}
+
 .retrofit-summary-card {
     background: rgba(8, 20, 34, 0.9);
     border: 1px solid var(--color-blue-cyan);
     padding: 18px;
-    margin-top: 20px;
+    margin-top: 18px;
 }
 
 .retrofit-badge {
@@ -1002,16 +1200,6 @@ html, body {
     color: var(--color-blue-cyan);
 }
 
-.retrofit-cta {
-    margin-top: 12px;
-    font-size: 12px;
-    color: var(--color-blue-ice);
-    font-style: italic;
-}
-
-/* --------------------------------------------------------------------------
-   SLA Contracts Cards (Mantenimiento / Contratos)
-   -------------------------------------------------------------------------- */
 .contracts-tier-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1077,104 +1265,6 @@ html, body {
     font-size: 9px;
 }
 
-/* --------------------------------------------------------------------------
-   Shop Catalog Styles (Tienda)
-   -------------------------------------------------------------------------- */
-.shop-controls-bar {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    margin-bottom: 18px;
-    flex-wrap: wrap;
-}
-
-.shop-filter-btn {
-    background: #0f1c2d;
-    border: 1px solid rgba(0, 210, 255, 0.3);
-    color: var(--color-gray-silver);
-    font-family: var(--font-rajdhani);
-    font-size: 13px;
-    font-weight: 700;
-    padding: 6px 14px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.shop-filter-btn.active, .shop-filter-btn:hover {
-    background: #172c47;
-    border-color: var(--color-blue-cyan);
-    color: var(--color-white-pure);
-}
-
-.shop-search-input {
-    flex: 1;
-    min-width: 200px;
-    background: #081321;
-    border: 1px solid rgba(0, 210, 255, 0.3);
-    color: #fff;
-    padding: 6px 12px;
-    font-family: var(--font-body);
-    font-size: 13px;
-}
-
-.shop-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-}
-
-.product-card {
-    background: rgba(10, 20, 33, 0.9);
-    border: 1px solid rgba(0, 210, 255, 0.25);
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.product-badge {
-    font-family: var(--font-mono);
-    font-size: 9px;
-    color: var(--color-success-cyan);
-    margin-bottom: 4px;
-}
-
-.product-ref {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: var(--color-gray-mid);
-}
-
-.product-title {
-    font-family: var(--font-rajdhani);
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--color-white-pure);
-    margin: 6px 0;
-}
-
-.product-desc {
-    font-size: 12px;
-    color: var(--color-gray-silver);
-    margin-bottom: 12px;
-    line-height: 1.4;
-}
-
-.product-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-top: 1px solid rgba(0, 210, 255, 0.15);
-    padding-top: 10px;
-}
-
-.product-price {
-    font-family: var(--font-orbitron);
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--color-blue-cyan);
-}
-
 .btn-quote-req {
     background: #14283f;
     border: 1px solid var(--color-blue-cyan);
@@ -1192,25 +1282,25 @@ html, body {
     color: #030812;
 }
 
-/* --------------------------------------------------------------------------
-   Responsive Design & Mobile Breakpoints
-   -------------------------------------------------------------------------- */
-@media (max-width: 1024px) {
+/* ==========================================================================
+   MOBILE & TABLET RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+@media (max-width: 1080px) {
     .hud-pillar-left, .hud-pillar-right {
         display: none;
     }
     .hud-top-left, .hud-bottom-left {
-        left: 18px;
+        left: 16px;
     }
     .hud-top-right, .hud-bottom-right {
-        right: 18px;
+        right: 16px;
     }
     .contracts-tier-grid {
         grid-template-columns: 1fr;
     }
 }
 
-@media (max-width: 820px) {
+@media (max-width: 860px) {
     .header-nav-buttons {
         display: none;
         position: absolute;
@@ -1221,6 +1311,8 @@ html, body {
         flex-direction: column;
         padding: 16px;
         border-bottom: 2px solid var(--color-blue-cyan);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.8);
+        gap: 10px;
     }
     .header-nav-buttons.mobile-open {
         display: flex;
@@ -1228,23 +1320,66 @@ html, body {
     .mobile-menu-btn {
         display: block;
     }
-    .hud-top-left, .hud-top-right {
+    .mobile-hud-toggle {
+        display: block;
+    }
+    #crt-toggle {
         display: none;
     }
-    .shop-grid {
+    .inverter-pillars-grid {
         grid-template-columns: 1fr;
     }
-    .hud-bottom-left, .hud-bottom-right {
-        width: calc(50% - 24px);
+
+    .hud-corner-panel {
+        display: none;
+    }
+
+    .hud-corner-panel.mobile-hud-visible {
+        display: block;
+        width: calc(100% - 32px);
+        left: 16px;
+        right: 16px;
+    }
+
+    .hud-top-left.mobile-hud-visible {
+        top: calc(var(--header-height) + 12px);
+    }
+    .hud-bottom-left.mobile-hud-visible {
+        bottom: 80px;
+    }
+
+    .contact-card-number {
+        font-size: 26px;
+        letter-spacing: 2px;
+    }
+
+    .hud-bottom-center {
+        width: calc(100% - 32px);
+        font-size: 10px;
+        padding: 6px 14px;
+        justify-content: space-between;
+    }
+    .cooling-pulse-bar {
+        display: none;
     }
 }
 
-@media (max-width: 580px) {
-    .hud-bottom-left, .hud-bottom-right {
+@media (max-width: 480px) {
+    .logo-brand-name {
+        font-size: 16px;
+    }
+    .logo-tagline {
         display: none;
     }
-    .hud-bottom-center {
-        width: 90%;
-        font-size: 10px;
+    .header-clock-module {
+        display: none;
+    }
+    .contact-card-number {
+        font-size: 22px;
+        letter-spacing: 1px;
+    }
+    .btn-whatsapp-direct, .btn-copy-phone, .btn-back-contact {
+        width: 100%;
+        justify-content: center;
     }
 }

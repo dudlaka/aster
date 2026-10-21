@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <defs>
+    <!-- Cold Blue Glow and Gradients -->
+    <linearGradient id="waBlueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00e1ff" />
+      <stop offset="60%" stop-color="#0088cc" />
+      <stop offset="100%" stop-color="#00558f" />
+    </linearGradient>
+    <linearGradient id="hatGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#d8ebfa" />
+    </linearGradient>
+    <filter id="iceShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#00d2ff" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <!-- Blue WhatsApp Background Circle & Speech Tail -->
+  <g filter="url(#iceShadow)">
+    <circle cx="50" cy="54" r="34" fill="url(#waBlueGrad)" stroke="#ffffff" stroke-width="1.8"/>
+    <!-- Speech bubble pointer -->
+    <path d="M26,68 L22,82 L34,77 Z" fill="#0088cc" stroke="#ffffff" stroke-width="1.2"/>
+    
+    <!-- White Phone Receiver Glyph -->
+    <path d="M38,42 C36.5,42 35,43.5 35,45 C35,59 47,71 61,71 C62.5,71 64,69.5 64,68 L60.5,60 C59.8,58.8 58,58.2 56.8,58.8 L53,60.8 C48.5,58.5 45.5,55.5 43.2,51 L45.2,47.2 C45.8,46 45.2,44.2 44,43.5 L38,42 Z" fill="#ffffff"/>
+  </g>
+
+  <!-- Winter Cold Beanie / White Hat on top of the icon -->
+  <g id="winter-hat">
+    <!-- Hat Pom-Pom (Borla blanca) -->
+    <circle cx="36" cy="14" r="7" fill="#ffffff" stroke="#c4e2ff" stroke-width="1.5" filter="url(#iceShadow)"/>
+    <!-- Pom-pom fluff details -->
+    <path d="M32,14 L40,14 M36,10 L36,18 M33,11 L39,17 M33,17 L39,11" stroke="#a3d2f7" stroke-width="1.2" stroke-linecap="round"/>
+
+    <!-- Main Hat Dome (Blanco puro con sombreado frío) -->
+    <path d="M22,30 C22,18 36,16 46,18 C56,20 62,24 64,32 Z" fill="url(#hatGrad)" stroke="#b5dcff" stroke-width="1.8"/>
+
+    <!-- Hat decorative cold stripes -->
+    <path d="M31,21 C36,22 48,24 53,27" stroke="#00b4d8" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <path d="M26,26 C33,27 49,29 59,31" stroke="#0077b6" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+    <!-- Folded Brim (Dobladillo de lana blanca esponjosa) -->
+    <rect x="18" y="28" width="50" height="9" rx="4.5" fill="#ffffff" stroke="#b2dcfc" stroke-width="1.5"/>
+    <!-- Brim rib knit stitches -->
+    <line x1="26" y1="29" x2="26" y2="36" stroke="#90c9f5" stroke-width="1.5"/>
+    <line x1="33" y1="29" x2="33" y2="36" stroke="#90c9f5" stroke-width="1.5"/>
+    <line x1="40" y1="29" x2="40" y2="36" stroke="#90c9f5" stroke-width="1.5"/>
+    <line x1="47" y1="29" x2="47" y2="36" stroke="#90c9f5" stroke-width="1.5"/>
+    <line x1="54" y1="29" x2="54" y2="36" stroke="#90c9f5" stroke-width="1.5"/>
+    <line x1="61" y1="29" x2="61" y2="36" stroke="#90c9f5" stroke-width="1.5"/>
+  </g>
+</svg>
